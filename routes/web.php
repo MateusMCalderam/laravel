@@ -28,5 +28,8 @@ Route::prefix('calc')->group(function () {
 });
 
 Route::prefix('keep')->group(function () {
-    Route::get('/', [KeepinhoController::class, 'index']);
+    Route::get('/', [KeepinhoController::class, 'index'])->name('keep.list');
+    Route::post('/', [KeepinhoController::class, 'create'])->name('keep.create');
+    Route::delete('/{id}', [KeepinhoController::class, 'delete'])->name('keep.delete');
+
 });
