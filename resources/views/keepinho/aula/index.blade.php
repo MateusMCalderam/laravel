@@ -3,9 +3,6 @@
 <head>
     <title>Keepinho</title>
     <style>
-        .form{
-            margin-bottom: 20px;
-        }
         .nota {
             display: inline-block;
             padding: 20px;
@@ -16,12 +13,6 @@
     </style>
 </head>
 <body>
-    <h1>Listagem de Notas</h1>
-    <form action="{{route('keep.create')}}" method="post" class="form">
-        @csrf
-        <input type="text" name="texto" />
-        <input type="submit">
-    </form>
     @if (count($notes) > 0)
 
     @foreach ($notes as $nota)
@@ -30,9 +21,7 @@
             <form action="{{ route('keep.delete', $nota['id']) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" style="background:none; border:none; color:blue; text-decoration:underline; cursor:pointer;">
-                    Deletar
-                </button>
+                <a href="{{route('keep.aula.editar', $nota->id)}}">Editar</a>
             </form>
 
         </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
+use App\Http\Controllers\KeepinhoAulaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,5 +32,12 @@ Route::prefix('keep')->group(function () {
     Route::get('/', [KeepinhoController::class, 'index'])->name('keep.list');
     Route::post('/', [KeepinhoController::class, 'create'])->name('keep.create');
     Route::delete('/{id}', [KeepinhoController::class, 'delete'])->name('keep.delete');
+});
 
+Route::prefix('aula/keep')->group(function () {
+    Route::get('/', [KeepinhoAulaController::class, 'index'])->name('keep.aula.list');
+    Route::get('/editar/{nota}', [KeepinhoAulaController::class, 'editar'])->name('keep.aula.editar');
+    Route::put('/editar', [KeepinhoAulaController::class, 'editar'])->name('keep.aula.editarGravar');
+    Route::post('/gravar', [KeepinhoAulaController::class, 'gravar'])->name('keep.aula.gravar');
+    Route::delete('apagar/{id}', [KeepinhoAulaController::class, 'aula'])->name('keep.aula.delete');
 });

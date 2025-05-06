@@ -18,6 +18,7 @@ class KeepinhoController extends Controller
         ]);
         
     }
+
     public function create(Request $r)
     {
         $r->validate([
@@ -27,6 +28,7 @@ class KeepinhoController extends Controller
         Notas::create(['texto' => $r->texto]);
         return redirect()->route('keep.list')->with('success', 'Nota adicionada com sucesso!');
     }
+
     public function delete(Request $r, $id)
     {
         $nota = Notas::find($id);
