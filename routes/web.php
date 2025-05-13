@@ -3,7 +3,6 @@
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\ClientesRestauranteController;
 use App\Http\Controllers\KeepinhoController;
-use App\Http\Controllers\KeepinhoAulaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,17 +31,10 @@ Route::prefix('calc')->group(function () {
 Route::prefix('keep')->group(function () {
     Route::get('/', [KeepinhoController::class, 'index'])->name('keep.list');
     Route::post('/', [KeepinhoController::class, 'create'])->name('keep.create');
+    Route::get('/form/{id?}', [KeepinhoController::class, 'form'])->name('keep.form');
+    Route::put('/', [KeepinhoController::class, 'update'])->name('keep.update');    
     Route::delete('/{id}', [KeepinhoController::class, 'delete'])->name('keep.delete');
 });
-
-Route::prefix('aula/keep')->group(function () {
-    Route::get('/', [KeepinhoAulaController::class, 'index'])->name('keep.aula.list');
-    Route::post('/gravar', [KeepinhoAulaController::class, 'gravar'])->name('keep.aula.gravar');    
-    Route::get('/editar/{nota}', [KeepinhoAulaController::class, 'editar'])->name('keep.aula.editar');
-    Route::put('/editar', [KeepinhoAulaController::class, 'editar'])->name('keep.aula.editarGravar');
-    Route::delete('apagar/{id}', [KeepinhoAulaController::class, 'aula'])->name('keep.aula.delete');
-});
-
 
 Route::prefix('restaurante')->group(function () {
     Route::get('/', [ClientesRestauranteController::class, 'index'])->name('restaurante.list');

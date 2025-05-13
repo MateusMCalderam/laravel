@@ -8,7 +8,7 @@ class Notas extends Model
 {
     protected $table = "notas";
     
-    protected $fillable = ['texto'];
+    protected $fillable = ['texto', 'titulo'];
 
 
 }
