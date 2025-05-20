@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\NotaRequest;
 use Illuminate\Http\Request;
 use App\Models\Notas;
 
@@ -19,14 +20,10 @@ class KeepinhoController extends Controller
         
     }
 
-    public function create(Request $r)
+    public function create(NotaRequest $r)
     {
-        $r->validate([
-            'texto' => 'required|string|max:255',
-            'titulo' => 'required|string|max:255',
-        ]);
-
-        Notas::create(['texto' => $r->texto, 'titulo' => $r->titulo]);
+        $dados = $r->validated();
+        Notas::create($dados);
         return redirect()->route('keep.list')->with('success', 'Nota adicionada com sucesso!');
     }
 
@@ -34,12 +31,10 @@ class KeepinhoController extends Controller
         $nota = Notas::find($r->id);
 
         $r->validate([
-            'texto' => 'required|string|max:255',
-            'titulo' => 'required|string|max:255',
+            'titulo' => 'required|min:3',
+            'texto' => 'required|max:255',
         ]);
-
-        $nota->texto = $r->texto;
-        $nota->titulo = $r->titulo;
+        $nota->fill($r->all());
         $nota->save();
         return redirect()->route('keep.list');
     }

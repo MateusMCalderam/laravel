@@ -31,7 +31,11 @@
 
 
     @if ($errors->any())
-        <h3 style="color: red;">Erro</h3>
+    <ul>
+        @foreach ($errors->all() as $erro)
+        <li style="color: red;">{{ $erro }}</li>
+        @endforeach
+    </ul>
     @endif
     @if (count($notes) > 0)
 
