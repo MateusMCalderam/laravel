@@ -19,12 +19,12 @@ class NotaRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array  
-    {   
-        if (!isMethod('GET')) {
+    public function rules(): array
+    {
+        if (!$this->isMethod('GET')) {
             return [
-                'titulo' => 'required|min:3',
-                'texto' => 'required|max:255',
+                'titulo' => 'required|min:3|max:255',
+                'texto' => 'required',
             ];
         }
 

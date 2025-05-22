@@ -34,6 +34,8 @@ Route::prefix('keep')->group(function () {
     Route::get('/form/{id?}', [KeepinhoController::class, 'form'])->name('keep.form');
     Route::put('/', [KeepinhoController::class, 'update'])->name('keep.update');    
     Route::delete('/{id}', [KeepinhoController::class, 'delete'])->name('keep.delete');
+    Route::get('/trash', [KeepinhoController::class, 'trash'])->name('keep.trash');
+    Route::get('/restore/{nota}', [KeepinhoController::class, 'restore'])->name('keep.restore');
 });
 
 Route::prefix('restaurante')->group(function () {

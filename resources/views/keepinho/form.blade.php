@@ -1,7 +1,7 @@
-<h1>Formulário Keep</h1>
-
-
-<h1>Listagem de Notas</h1>
+<h1>💡Keepinho</h1>
+<h2>Listagem</h2>
+<a href="{{ route('keep.trash') }}">Lixeira</a>
+<hr/>
 
 @if ($errors->any())
     <ul>

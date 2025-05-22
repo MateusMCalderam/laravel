@@ -16,7 +16,11 @@
     </style>
 </head>
 <body>
-    <h1>Listagem de Notas</h1>
+    <h1>💡Keepinho</h1>
+    <h2>📈 Listagem</h2>
+    <a href="{{ route('keep.trash') }}">Lixeira</a>
+    <hr/>
+
     <form action="{{route('keep.create')}}" method="post" class="form">
         @csrf
         <label for="titulo">Titulo:</label>
@@ -25,10 +29,6 @@
         <input type="text" name="texto" value="{{ $nota->texto ?? '' }}"/><br/>
         <input type="submit">
     </form>
-    
-        <a href="{{route('keep.form')}}">Adicionar</a>
-        <br><br>
-
 
     @if ($errors->any())
     <ul>
@@ -37,8 +37,8 @@
         @endforeach
     </ul>
     @endif
-    @if (count($notes) > 0)
 
+    @if (count($notes) > 0)
     @foreach ($notes as $nota)
         <div class="nota">
             <strong>Titulo:</strong>{{ $nota['titulo'] }} <br/>
