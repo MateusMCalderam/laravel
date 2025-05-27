@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\ClientesRestauranteController;
 use App\Http\Controllers\KeepinhoController;
@@ -45,4 +46,13 @@ Route::prefix('restaurante')->group(function () {
     Route::get('/form/{id}', [ClientesRestauranteController::class, 'update'])->name('restaurante.formUpdate');
     Route::put('/{id}', [ClientesRestauranteController::class, 'update'])->name('restaurante.update');
     Route::delete('/{id}', [ClientesRestauranteController::class, 'delete'])->name('restaurante.delete');
+});
+
+
+Route::prefix('autenticate')->group(function () {
+    Route::get('/', [AuthController::class, 'index'])->name('autenticate');
+    Route::post('/create', [AuthController::class, 'create'])->name('autenticate.create');
+    
+    Route::get('/login', [AuthController::class, 'login'])->name('autenticate.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
