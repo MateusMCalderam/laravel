@@ -1,10 +1,28 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\ClientesRestauranteController;
 use App\Http\Controllers\KeepinhoController;
-use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
 
 
 Route::get('/', function () {
@@ -46,13 +64,4 @@ Route::prefix('restaurante')->group(function () {
     Route::get('/form/{id}', [ClientesRestauranteController::class, 'update'])->name('restaurante.formUpdate');
     Route::put('/{id}', [ClientesRestauranteController::class, 'update'])->name('restaurante.update');
     Route::delete('/{id}', [ClientesRestauranteController::class, 'delete'])->name('restaurante.delete');
-});
-
-
-Route::prefix('autenticate')->group(function () {
-    Route::get('/', [AuthController::class, 'index'])->name('autenticate');
-    Route::post('/create', [AuthController::class, 'create'])->name('autenticate.create');
-    
-    Route::get('/login', [AuthController::class, 'login'])->name('autenticate.login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
 });

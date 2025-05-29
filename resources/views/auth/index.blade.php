@@ -1,4 +1,11 @@
 <h1>Usuários</h1>
+@if (Auth::user())
+    Olá {{ Auth::user()->name }}
+    <a href="{{ route('logout') }}">Logout</a>
+    @else
+    Não Autenticado
+    <a href="{{ route('autenticate.login') }}">Login</a>
+@endif
 <hr>
 
 @if ($errors->any())
@@ -21,3 +28,10 @@
 <input type="password" name="password_confirmation" id="password_confirm"><br>
 <button type="submit">Enviar</button>
 </form>
+
+<hr>
+<ul>
+    @foreach ($users as $user )
+        <li>{{ $user->name }}</li>
+    @endforeach
+</ul>

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     public function index(){
-        return view('auth.index');
+
+        $users = User::all();
+        return view('auth.index', compact('users'));
     }
     public function create(AutenticateRequest $req){
         User::create($req->all());
@@ -27,5 +29,10 @@ class AuthController extends Controller
         }
 
         return view('auth.login');
+    }
+    public function logout(Request $req){
+        Auth::logout();
+
+        return redirect()->route('autenticate');
     }
 }
