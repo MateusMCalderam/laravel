@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculosController;
@@ -65,3 +66,6 @@ Route::prefix('restaurante')->group(function () {
     Route::put('/{id}', [ClientesRestauranteController::class, 'update'])->name('restaurante.update');
     Route::delete('/{id}', [ClientesRestauranteController::class, 'delete'])->name('restaurante.delete');
 });
+
+
+Route::resource('produtos', ProdutosController::class);
