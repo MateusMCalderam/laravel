@@ -3,15 +3,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <x-link-button href="{{ route('produtos.create') }}">
+                    <x-link-button href="{{ route('carrinho.create') }}">
                         + Produto
                     </x-link-button>
-                    <x-link-button href="{{ route('carrinho') }}">
-                        Carrinho
-                    </x-link-button>
 
 
-                    @if (count($produtos) > 0)
+                    @if (count($carrinho) > 0)
                     
                     
                     <div class="relative overflow-x-auto mt-6">
@@ -34,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($produtos as $produto)
+                                @foreach($carrinho as $produto)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

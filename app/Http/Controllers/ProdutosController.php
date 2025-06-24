@@ -30,10 +30,25 @@ class ProdutosController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
-        Produto::create($request->all());   
-        return redirect()->route('produtos.index');
+    {
+        $arquivo = $request->file('imagem');
+
+        if ($arquivo) {
+            $path = $arquivo->store('fotos', 'public');
+
+            Produto::create([
+                'nome' => $request->input('nome'),
+                'preco' => $request->input('preco'),
+                'descricao' => $request->input('descricao'),
+                'imagem' => $path,
+            ]);
+
+            return redirect()->route('produtos.index');
+        } else {
+            return back()->withErrors(['imagem' => 'Nenhuma imagem foi enviada.']);
+        }
     }
+    
 
     /**
      * Display the specified resource.
@@ -65,5 +80,20 @@ class ProdutosController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function storeCarrinho(Request $request, $id)
+    {   
+        $produto = Produto::findOrFail($id);
+        if ($produto) {
+            $request->session()->push('carrinho', $id);        
+        }
+        return redirect()->route('produtos.index');
+    }
+    public function indexCarrinho(Request $request)
+    {   
+        $data = $request->session()->all();
+        dd($data);
+       
+        return redirect()->route('produtos.index');
     }
 }

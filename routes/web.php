@@ -69,3 +69,5 @@ Route::prefix('restaurante')->group(function () {
 
 
 Route::resource('produtos', ProdutosController::class);
+Route::get('/carrinho', [ProdutosController::class, 'indexCarrinho'])->name('carrinho');
+Route::get('/carrinho/{id}', [ProdutosController::class, 'storeCarrinho'])->name('carrinho.add');
