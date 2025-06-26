@@ -18,7 +18,12 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
-                        Produtos
+                        Produtos Admin
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('produtos.public')" :active="request()->routeIs('produtos.public')">
+                        Produtos Público
                     </x-nav-link>
                 </div>
             </div>

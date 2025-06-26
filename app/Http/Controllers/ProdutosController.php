@@ -17,6 +17,14 @@ class ProdutosController extends Controller
             'produtos' => $produtos
         ]);
     }
+
+    public function indexPublic()
+    {   
+        $produtos = Produto::all();
+        return view('produtos.public', [
+            'produtos' => $produtos
+        ]);
+    }
     
     /**
      * Show the form for creating a new resource.
@@ -81,19 +89,44 @@ class ProdutosController extends Controller
     {
         //
     }
-    public function storeCarrinho(Request $request, $id)
-    {   
-        $produto = Produto::findOrFail($id);
-        if ($produto) {
-            $request->session()->push('carrinho', $id);        
-        }
-        return redirect()->route('produtos.index');
+
+    
+ public function indexCarrinho(Request $request)
+    {
+        $ids = $request->session()->get('carrinho', []);
+
+        $produtos = Produto::whereIn('id', $ids)->get();
+
+        return view('produtos.carrinho', [
+            'produtos' => $produtos
+        ]);
     }
-    public function indexCarrinho(Request $request)
-    {   
-        $data = $request->session()->all();
-        dd($data);
-       
-        return redirect()->route('produtos.index');
+
+    public function removeCarrinho(Request $request, $id)
+    {
+        $ids = $request->session()->get('carrinho', []);
+
+        // Remove todas as ocorrências do ID
+        $ids = array_filter($ids, function ($item) use ($id) {
+            return $item != $id;
+        });
+
+        $request->session()->put('carrinho', array_values($ids));
+
+        return redirect()->route('carrinho.index');
+    }
+
+    public function storeCarrinho(Request $request, $id)
+    {
+        $produto = Produto::findOrFail($id);
+
+        $ids = $request->session()->get('carrinho', []);
+
+        if (!in_array($id, $ids)) {
+            $ids[] = $id;
+            $request->session()->put('carrinho', $ids);
+        }
+
+        return redirect()->route('carrinho.index');
     }
 }

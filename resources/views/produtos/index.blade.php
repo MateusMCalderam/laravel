@@ -6,10 +6,6 @@
                     <x-link-button href="{{ route('produtos.create') }}">
                         + Produto
                     </x-link-button>
-                    <x-link-button href="{{ route('carrinho') }}">
-                        Carrinho
-                    </x-link-button>
-
 
                     @if (count($produtos) > 0)
                     
@@ -52,9 +48,6 @@
                                             @else
                                             <h1 class="mt-4">Nenhum Imagem Cadastrado</h1>
                                             @endif
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <a href="{{ route('carrinho.add', $produto->id)}}">Adicionar ao Carrinho</a>
                                         </td>
                                     </tr>
                                 @endforeach

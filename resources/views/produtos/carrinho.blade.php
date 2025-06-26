@@ -3,12 +3,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <x-link-button href="{{ route('carrinho.create') }}">
-                        + Produto
+                    <h1>Carrinho de Produtos</h1>
+                    
+                    <x-link-button href="{{ route('produtos.public') }}">
+                        Voltar Para Produtos
                     </x-link-button>
 
-
-                    @if (count($carrinho) > 0)
+                    @if (count($produtos) > 0)
                     
                     
                     <div class="relative overflow-x-auto mt-6">
@@ -31,7 +32,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($carrinho as $produto)
+                                @foreach($produtos as $produto)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -51,8 +52,13 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="{{ route('carrinho.add', $produto->id)}}">Adicionar ao Carrinho</a>
+                                            <form action="{{ route('carrinho.remove', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover este item?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:underline">Remover do carrinho</button>
+                                            </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
