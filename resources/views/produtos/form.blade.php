@@ -10,14 +10,17 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ $produto->id ? route('produtos.update', $produto->id) : route('produtos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if ($produto->id)        
+                            @method('PUT')
+                        @endif
 
                         <!-- Name -->
                         <div>
                             <x-input-label class="mt-4" for="nome" :value="__('Nome')" />
                             <x-text-input id="nome" class="block mt-2" type="text" name="nome"
-                                :value="old('nome')" required autofocus autocomplete="nome" />
+                                :value="old('nome') ?? $produto->nome" required autofocus autocomplete="nome" />
                             <x-input-error :messages="$errors->get('nome')" class="mt-2" />
                         </div>
 
@@ -25,16 +28,16 @@
                         <div>
                             <x-input-label class="mt-4" for="preco" :value="__('Preço')" />
                             <x-text-input id="preco" class="block mt-2" type="number" name="preco"
-                                :value="old('preco')" required autofocus autocomplete="preco" />
+                                :value="old('preco') ?? $produto->preco" required autofocus autocomplete="preco" />
                             <x-input-error :messages="$errors->get('preco')" class="mt-2" />
                         </div>
 
                         <!-- Descricao -->
                         <div>
                             <x-input-label class="mt-4" for="descricao" :value="__('Descrição')" />
-                            <x-textarea id="descricao" class="block mt-2" name="descricao"
+                            <x-textarea id="descricao" class="block" name="descricao"
                             required autofocus autocomplete="descricao">
-                                {{ old('descricao') }}
+                                {{ old('descricao') ?? $produto->descricao }}
                             </x-textarea>
                             <x-input-error :messages="$errors->get('descricao')" class="mt-2" />
                         </div>

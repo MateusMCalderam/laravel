@@ -4,6 +4,7 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClientesRestauranteController;
 use App\Http\Controllers\KeepinhoController;
 
@@ -70,6 +71,8 @@ Route::prefix('restaurante')->group(function () {
 
 Route::resource('produtos', ProdutosController::class);
 Route::get('/public/produtos', [ProdutosController::class, 'indexPublic'])->name('produtos.public');
-Route::get('/carrinho', [ProdutosController::class, 'indexCarrinho'])->name('carrinho.index');
-Route::get('/carrinho/{id}', [ProdutosController::class, 'storeCarrinho'])->name('carrinho.add');
-Route::delete('/carrinho/{id}', [ProdutosController::class, 'removeCarrinho'])->name('carrinho.remove');
+
+
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+Route::get('/carrinho/{id}', [CarrinhoController::class, 'store'])->name('carrinho.add');
+Route::delete('/carrinho/{id}', [CarrinhoController::class, 'remove'])->name('carrinho.remove');

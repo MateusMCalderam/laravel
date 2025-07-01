@@ -49,6 +49,9 @@
                                             <h1 class="mt-4">Nenhum Imagem Cadastrado</h1>
                                             @endif
                                         </td>
+                                        <td class="px-6 py-4">
+                                            <a href="{{ route('produtos.edit', $produto->id) }}">Editar</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
