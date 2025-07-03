@@ -52,6 +52,13 @@
                                         <td class="px-6 py-4">
                                             <a href="{{ route('produtos.edit', $produto->id) }}">Editar</a>
                                         </td>
+                                        <td class="px-6 py-4">
+                                            <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover este item?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:underline">Remover</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
