@@ -16,5 +16,7 @@ class CategorySeeder extends Seeder
         Category::create(['name' => "Variedades"]);
         Category::create(['name' => "Economia"]);
         Category::create(['name' => "Lazer"]);
+        Category::create(['name' => "Esporte"]);
+        Category::create(['name' => "Política"]);
     }
 }

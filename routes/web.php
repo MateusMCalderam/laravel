@@ -7,6 +7,7 @@ use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClientesRestauranteController;
 use App\Http\Controllers\KeepinhoController;
+use App\Http\Controllers\PostsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -76,3 +77,5 @@ Route::get('/public/produtos', [ProdutosController::class, 'indexPublic'])->name
 Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
 Route::get('/carrinho/{id}', [CarrinhoController::class, 'store'])->name('carrinho.add');
 Route::delete('/carrinho/{id}', [CarrinhoController::class, 'remove'])->name('carrinho.remove');
+
+Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
