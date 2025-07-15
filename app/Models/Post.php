@@ -22,6 +22,6 @@ class Post extends Model
     }
     
     public function comments () : HasMany {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 }

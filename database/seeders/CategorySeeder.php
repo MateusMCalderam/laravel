@@ -13,10 +13,19 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::create(['name' => "Variedades"]);
-        Category::create(['name' => "Economia"]);
-        Category::create(['name' => "Lazer"]);
-        Category::create(['name' => "Esporte"]);
-        Category::create(['name' => "Política"]);
+
+        function random_color() {
+            $r = mt_rand(0, 100); 
+            $g = mt_rand(0, 100); 
+            $b = mt_rand(0, 100); 
+        
+            return sprintf("%02x%02x%02x", $r, $g, $b);
+        }
+
+        Category::create(['name' => "Variedades", "color" => random_color()]);
+        Category::create(['name' => "Economia", "color" => random_color()]);
+        Category::create(['name' => "Lazer", "color" => random_color()]);
+        Category::create(['name' => "Esporte", "color" => random_color()]);
+        Category::create(['name' => "Política", "color" => random_color()]);
     }
 }

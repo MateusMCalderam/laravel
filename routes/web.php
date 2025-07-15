@@ -79,3 +79,4 @@ Route::get('/carrinho/{id}', [CarrinhoController::class, 'store'])->name('carrin
 Route::delete('/carrinho/{id}', [CarrinhoController::class, 'remove'])->name('carrinho.remove');
 
 Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
+Route::get('/posts/{id}', [PostsController::class, 'show'])->name('post.show');
